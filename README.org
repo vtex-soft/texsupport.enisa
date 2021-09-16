@@ -2,7 +2,7 @@
 * Getting started
 
   Download
-  [[https://github.com/vtex-soft/texsupport.enisa/raw/master/release/enisa-project-template.zip][enisa-project-template]
+  [[https://github.com/vtex-soft/texsupport.enisa/raw/master/release/enisa-project-template.zip][enisa-project-template]]
   package and unzip it.
   Rename the folder =enisa-project-template= to =<your-project-name>=.
   The package is self-contained, which means that once unzipped you can start
