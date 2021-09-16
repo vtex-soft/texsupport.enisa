@@ -1,0 +1,13 @@
+2021-09-16 v1.0.2 Deimantas Galcius
+	* sty/enisareport.cls
+	- fix float parameters
+	- amend tt family
+	- fix RH for  marking
+	- clean marginnote code
+
+2021-09-15 v1.0.1 Deimantas Galcius
+	* sty/enisareport.cls add \maketitle
+
+2021-09-15 v1.0.0 Deimantas Galcius
+	* sty/enisareport.cls RELEASE v1.0.0
+	* ChangeLog started.

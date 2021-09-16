@@ -1,0 +1,508 @@
+\RequirePackage{etoolbox}
+\csdef{input@path}{{../sty/},{../img/}}
+%
+\documentclass{enisareport}
+%
+% Metadata
+\title{ Report title }
+\subtitle{ Report subtitle }
+
+\rhtitle{RH short title}       %% Short running title if necessary
+\rhsubtitle{RH short subtitle} %% Short running subtitle if necessary
+
+\date{Month Year}
+
+\marking{Marking}
+
+
+\theoremstyle{plain}
+\newtheorem{question}{Question}[chapter]
+\newtheorem*{question*}{Question}
+\theoremstyle{definition}
+\newtheorem*{answer}{Answer}
+
+
+\usepackage{lipsum}
+%\usepackage{blindtext}
+\usepackage{fancyvrb}
+\DefineShortVerb{\|}
+\usepackage{multicol}
+\begin{document}
+
+\maketitle
+
+% Contents
+\tableofcontents
+
+\chapter{Chapter title}\label{chap1}
+
+\lipsum[1]
+
+
+\marginnote{% needs few LaTeX runs
+  %\color{blue} % change marginnote text color. Default is 'red'
+  \lipsum[1][2]
+} 
+
+\section{Section title}\label{sec1.1}
+
+\lipsum[1][4]
+%
+\begin{equation*}
+  H : \{0,1\}^{*} \mapsto \{0,1\}^{h}.
+  \end{equation*}
+%
+\lipsum[2][4]
+
+\section{Section title}
+
+\lipsum[3][1-6]
+
+\subsection{Subsection title}
+
+\lipsum[3][2-9]
+
+\subsection{Subsection title}
+
+\lipsum[3][2-9]
+
+\subsubsection{Subsubsection title}
+
+\lipsum[3][3-6]
+
+\paragraph{Paragraph title}
+
+\lipsum[3][1-4]
+
+
+\chapter{Title that can be few lines long}\label{chap2}
+
+\section{Section title}\label{sec21}
+
+
+
+% \marginnotebox{<bg-color>}{<text>} % requires few latex runs
+\marginnotebox{enisablue}
+{%
+  \title{Title of the margin text box}
+  \lipsum[2][1-3]
+}
+
+\lipsum[1]\footnote{\lipsum[1][2]} \lipsum[2-4]
+
+\clearpage
+
+\section{Figures}
+
+\lipsum[1]
+%
+% typewidth figure with long caption
+%
+\begin{figure*}
+  \caption{Wide (typewidth) figure; long caption: \lipsum[4]}
+  \includegraphics[width=\typewidth]{dice}
+\end{figure*}
+%
+% textwidth figure with short caption
+%
+\begin{figure}
+  \caption{Wide (textwidth) figure; long caption: \lipsum[4][1]}
+  \includegraphics[width=\textwidth]{dice}
+\end{figure}
+%
+% narrow figure with short caption
+%
+\begin{figure}
+  \caption{Narrow figure; short caption: \lipsum[4][1]}
+  \includegraphics[width=.45\textwidth]{dice}
+\end{figure}
+
+\clearpage
+
+\section{Tables}%
+\label{sec:tabs}
+
+\lipsum[4]
+%
+% typewidth table
+%
+\begin{table*}
+  \caption{ \lipsum[3][1-2] }\label{tab2}
+%
+  % \rowcolors{1}{black!11}{black!0} % alternating row colors 11% gray and white.
+    \rowcolors{1}{white}{enisa_grey11} % alternatring row colors white and 11% gray.
+    \begin{tabularx}{\typewidth}{XXrrrr}
+% row 1
+      \hiderowcolors
+      % \rowcolor{enisa_grey50}% table header color
+      \rowcolor{enisablue}% table header color
+    % 
+      \multicolumn{1}{l}{\colhead{Season}}
+    & \multicolumn{1}{l}{\colhead{Parameter}}
+    & \multicolumn{2}{c}{\colhead{Two-piece method}}
+    & \multicolumn{2}{c}{\colhead{Marginal method}} \\
+% row 2
+      &
+      & \colhead{EST}
+      & \colhead{SE}
+      & \colhead{EST}
+      & \colhead{SE}
+      \\
+% row 3
+      \showrowcolors % set alternating colors defined with \rowcolors
+      Summer
+      & $\lambda_1$
+      & 2.841
+      & 0.459
+      & 1.090
+      & 0.280
+      \\
+   & $\lambda_0$ & 0.179 & 0.014 & 0.158 & 0.015 \\
+   & $\sigma$ & 1.335 & 0.106 & 0.999 & 0.104 \\
+   & $\sigma_\epsilon (\times 10^{-2})$ & 1.854 & 0.087 & 1.879 & 0.078 \\
+  Winter & $\lambda_1$ & 6.225 & 0.825 & 4.720 & 0.711 \\
+   & $\lambda_0$ & 0.118 & 0.010 & 0.114 & 0.009 \\
+   & $\sigma$ & 1.506 & 0.095 & 1.454 & 0.089 \\
+                               & $\sigma_\epsilon (\times 10^{-2})$ & 0.908 & 0.036 & 0.934 & 0.043 \\
+    \end{tabularx}
+\end{table*}
+%
+%
+%
+\begin{table}
+  \caption{ \lipsum[4][2] }
+    % \rowcolors{1}{black!11}{black!0} % alternating row colors 11% gray and white.
+    \rowcolors{1}{white}{enisa_grey11} % alternatring row colors white and 11% gray.
+%    \centering
+    \begin{tabular*}{26.8pc}{llrrrr}
+% row 1
+      \hiderowcolors
+      % \rowcolor{black!50}% table header color
+      \rowcolor{enisared}% table header color
+      \arrayrulecolor{enisared}%
+      %
+%      \hline
+      \multicolumn{1}{l|}{\colhead{Season}}
+      & \multicolumn{1}{l|}{\colhead{Parameter}}
+      & \multicolumn{2}{c|}{\colhead{Two-piece method}}
+      & \multicolumn{2}{c|}{\colhead{Marginal method}} \\
+%      \hline
+% row 2
+      &
+      & \colhead{EST}
+      & \colhead{SE}
+      & \colhead{EST}
+      & \colhead{SE}
+      \\
+%      \hline
+% row 3
+      \showrowcolors
+      \arrayrulecolor{black}%
+      Summer
+      & $\lambda_1$
+      & 2.841
+      & 0.459
+      & 1.090
+      & 0.280
+      \\%\hline
+   & $\lambda_0$ & 0.179 & 0.014 & 0.158 & 0.015 \\%\hline
+  Winter & $\lambda_1$ & 6.225 & 0.825 & 4.720 & 0.711 \\%\hline
+   & $\lambda_0$ & 0.118 & 0.010 & 0.114 & 0.009 \\%\hline
+\\%\hline
+    \end{tabular*}
+\end{table}
+
+
+\begin{table}
+  \caption{ \lipsum[4][2] }%
+    % \rowcolors{1}{black!11}{black!0} % alternating row colors 11% gray and white.
+    \rowcolors{1}{white}{enisa_grey11} % alternatring row colors white and 10% gray.
+    \begin{tabularx}{\textwidth}{XXrr>{\extracolsep{1pc}}rr}
+      \hiderowcolors
+      \rowcolor{enisa_grey50}% table header color
+% row1
+        \multicolumn{1}{l}{\colhead{Season}}
+      & \multicolumn{1}{l}{\colhead{Parameter}}
+      & \multicolumn{2}{c}{\colhead{Two-piece method}}
+      & \multicolumn{2}{c}{\colhead {Marginal method}}
+      \\
+% row 2
+      &
+      & \colhead{EST}
+      & \colhead{SE}
+      & \colhead{EST}
+      & \colhead{SE}
+      \\
+% row3
+      \showrowcolors
+      Summer
+      & $\lambda_1$
+      & 2.841
+      & 0.459
+      & 1.090
+      & 0.280
+      \\
+      & $\lambda_0$
+      & 0.179
+      & 0.014
+      & 0.158
+      & 0.015
+      \\
+      Winter
+      & $\lambda_1$
+      & 6.225
+      & 0.825
+      & 4.720
+      & 0.711
+      \\
+      & $\lambda_0$
+      & 0.118
+      & 0.010
+      & 0.114
+      & 0.009
+      \\
+  \end{tabularx}
+\end{table}
+
+
+\lipsum[4][3]
+
+
+\clearpage
+
+\section{Lists: itemize, enumerate, desciption}
+
+\lipsum[5]
+    
+\begin{itemize}
+  \item Bullet points first item
+  \item Bullet points second item
+  \item Bullet points third item
+    \begin{itemize}
+    \item Bullet points first item
+    \item Bullet points second item
+    \item Bullet points third item
+      \begin{itemize}
+      \item Bullet points first item
+      \item Bullet points second item
+      \item Bullet points third item
+      \end{itemize}
+     \end{itemize}
+ \end{itemize}
+
+\begin{enumerate}
+  \item Bullet points first item
+  \item Bullet points second item
+  \item Bullet points third item
+    \begin{enumerate}
+    \item Bullet points first item
+    \item Bullet points second item
+    \item Bullet points third item
+      \begin{enumerate}
+      \item Bullet points first item
+      \item Bullet points second item
+      \item Bullet points third item
+      \end{enumerate}
+     \end{enumerate}
+ \end{enumerate}
+
+
+\begin{itemize}
+\item First long item.
+  \lipsum[3][1-3]
+  \item Second short item.
+    \begin{itemize}
+      \item First of second item.
+      \item Second of second item.
+        \begin{itemize}
+        \item First of third level item
+          \end{itemize}
+    \end{itemize}
+\item Third short item
+\end{itemize}
+
+\lipsum[1][3-7]
+
+\begin{enumerate}
+\item First long item.
+  \lipsum[4][1-4]
+  \item Second short item.
+    \begin{enumerate}
+      \item First of second item.
+      \item Second of second item.
+        \begin{enumerate}
+        \item First of third level item
+          \end{enumerate}
+    \end{enumerate}
+\item Third short item
+\end{enumerate}
+
+\lipsum[1][3]
+
+\begin{description}
+\item[first]  \lipsum[4][2]
+\item[second] \lipsum[4][3]
+\item[third]  \lipsum[4][4-5]
+
+\end{description}
+
+
+
+\begin{itemize}[label=\textcolor{enisa_orange}{\large\bfseries Q}]
+\item \lipsum[3][1-2]
+\item \lipsum[4][1-2]
+\item \lipsum[5][1-2]
+\item \lipsum[6][1-2]
+\item \lipsum[7][1-2]
+\end{itemize}
+
+
+\section{Theorem and alike}
+
+\begin{question}
+\lipsum[1]
+\end{question}
+
+\begin{answer}[Optional title]
+\lipsum[2]
+\end{answer}
+
+\begin{question*}
+  \lipsum[3]
+\end{question*}
+
+
+
+\section{Citing references}
+
+\cite{CCS:AHIV17}
+
+\citep{STOC:BenGolWig88}; \citet{STOC:BenGolWig88}, \citet*{STOC:BenGolWig88}
+
+\cite{CCS:AHIV17, STOC:BenGolWig88, SP:BCGGMT14}
+
+
+\begin{thebibliography}{31}
+
+\bibitem[Ames et~al.(2017)Ames, Hazay, Ishai, and
+  Venkitasubramaniam]{CCS:AHIV17}
+Ames,~S., Hazay,~C., Ishai,~Y., and Venkitasubramaniam,~M.
+\newblock Ligero: Lightweight sublinear arguments without a trusted setup.
+\newblock In Thuraisingham, B.M., Evans,~D., Malkin,~T., and Xu,~D., editors,
+  \emph{ACM CCS 2017: 24th Conference on Computer and Communications Security},
+  pages 2087--2104, Dallas, TX, USA, Oct.~31~--~Nov.~2, 2017. {ACM} Press.
+\newblock \doi{10.1145/3133956.3134104}.
+
+
+\bibitem[{Ben-Or} et~al.(1988){Ben-Or}, Goldwasser, and
+  Wigderson]{STOC:BenGolWig88}
+{Ben-Or},~M., Goldwasser,~S., and Wigderson,~A.
+\newblock Completeness theorems for non-cryptographic fault-tolerant
+  distributed computation (extended abstract).
+\newblock In \emph{20th Annual {ACM} Symposium on Theory of Computing}, pages
+  1--10, Chicago, IL, USA, May~2--4, 1988. {ACM} Press.
+\newblock \doi{10.1145/62212.62213}.
+
+\bibitem[{Ben-Sasson} et~al.(2014){Ben-Sasson}, Chiesa, Garman, Green, Miers,
+  Tromer, and Virza]{SP:BCGGMT14}
+{Ben-Sasson},~E., Chiesa,~A., Garman,~C., Green,~M., Miers,~I., Tromer,~E., and
+  Virza,~M.
+\newblock Zerocash: Decentralized anonymous payments from bitcoin.
+\newblock In \emph{2014 {IEEE} Symposium on Security and Privacy}, pages
+  459--474, Berkeley, CA, USA, May~18--21, 2014. {IEEE} Computer Society Press.
+\newblock \doi{10.1109/SP.2014.36}.
+
+\end{thebibliography}
+
+\appendix
+\chapter{Chapter title as appendix}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisis sem. Nullam nec
+mi et neque pharetra sollicitudin.
+
+\section{Section title with math $ a + \beta b < 2 \pi $}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisis sem. Nullam nec
+mi et neque pharetra sollicitudin.
+
+
+\section{Section title bookmarks altered with
+  \protect\NoCaseChange{\texttt{$\backslash$texorpdfstring}}
+  $ \texorpdfstring{\alpha}{alpha} + \texorpdfstring{\beta}{beta} < 2
+  \texorpdfstring{\pi}{pi}$
+  and \protect\NoCaseChange{Text Case Unchanged}
+}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisis sem. Nullam nec
+mi et neque pharetra sollicitudin.
+
+\section{Colors defined}
+
+\long\def\tcolor#1%
+{%
+  \hbox%
+  {%
+    \hbox to 18pc%
+    {%
+      \texttt{\string\textcolor\{\detokenize{#1}\}}%
+      \hss%
+    }%
+    \quad%
+    \textcolor{#1}%
+    {%
+      \rule[-6pt]{8pc}{2pc}%
+    }%
+    \hss%
+  }%
+  \vskip1pc%
+}%
+
+\tcolor{enisablue}
+\tcolor{enisared}
+\tcolor{enisa_red}
+\tcolor{enisa_green}
+\tcolor{enisa_orange}
+\tcolor{enisa_bluelight}
+\tcolor{enisa_bluegraphics}
+\tcolor{enisa_bluegraphicslight}
+\tcolor{enisa_black}
+\tcolor{enisa_grey80}
+\tcolor{enisa_grey50}
+\tcolor{enisa_grey40}
+\tcolor{enisa_grey30}
+\tcolor{enisa_grey11}
+
+
+\section{List of packages used}
+
+\begin{multicols}{3}
+\begin{itemize}
+\item etoolbox
+\item environ
+\item calc
+\item ragged2e
+\item parskip
+\item rotating
+\item textcase
+\item noto
+\item newtxmath
+\item amsmath
+\item amsfonts
+\item amssymb
+\item amsthm
+\item float
+\item xcolor
+\item colortbl
+\item tabularx
+\item booktabs
+\item graphicx
+\item caption
+\item enumitem
+\item marginnote
+\item natbib
+\item hyperref
+\end{itemize}
+\end{multicols}
+
+\end{document}
+

@@ -1,0 +1,11 @@
+2021 09 16 deimi
+
+report.tex     - template LaTeX file
+sty/           - LaTeX class and style image files
+img/           - your own image files: pdf, png for tex->pdf workflow or 
+                 eps for dvi->ps workflow
+doc/sample.pdf - sample report document
+ChangeLog      - changelog file
+LICENSE        - linence file
+Makefile       - a template for Makefile
+
