@@ -1,3 +1,9 @@
+2021-09-16 v1.0.3 Deimantas Galcius
+	* sty/enisareport.cls
+	fix \part output
+	* doc/sample.tex
+	add \part command
+
 2021-09-16 v1.0.2 Deimantas Galcius
 	* sty/enisareport.cls
 	- fix float parameters

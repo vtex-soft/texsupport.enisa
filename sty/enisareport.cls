@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{enisareport}
-              [2021/09/15 v1.0.2
+              [2021/10/11 v1.0.3
  enisa LaTeX document class]
 \LoadClass{report}
 
@@ -167,6 +167,51 @@
 \colorlet{blue}{enisablue}
 \colorlet{red}{enisared}
 \colorlet{ENISARED}{enisared}
+%
+% Part
+%
+\renewcommand\part{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \thispagestyle{part}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\protect\numberline{\thepart}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}%
+    {\raggedright
+      \interlinepenalty \@M
+      \color{enisared}%
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \fontsize{25}{30}\bfseries \MakeTextUppercase{\partname}\nobreakspace\thepart
+       \par
+       \vskip 20\p@
+       \fi
+     \fontsize{48}{56} \bfseries \MakeTextUppercase{#2}\par}%
+    \@endpart}
+\def\@spart#1{%
+    {\raggedright
+      \color{enisared}%
+      \interlinepenalty \@M
+     \normalfont
+     \fontsize{30}{36} \bfseries \MakeTextUppercase{#1}\par}%
+    \@endpart}
+\def\@endpart{\vfil\newpage}
 %
 % Chapter
 %
@@ -359,6 +404,12 @@
   \def\@evenhead{\enisaheader}%
   \def\@oddhead{\enisaheader}%
 }
+\def\ps@part{%
+  \def\@oddfoot{\empty}%
+  \def\@evenfoot{\empty}%
+  \def\@evenhead{\enisaheader}%
+  \def\@oddhead{\enisaheader}%
+}
 \let\ps@plain\ps@headings
 \RequirePackage{enumitem}
 \setlist
@@ -438,10 +489,14 @@
 %
 % taken from V.K. code
 %
+\renewcommand*\l@part{\let\numberline\partnumberline\@tocline{-1}{0pt}{0pt}}
 \renewcommand*\l@chapter{\let\numberline\chapternumberline\@tocline{0}{\z@}{2.5em}}
 \renewcommand*\l@section{\let\numberline\sectionnumberline\@tocline{1}{\z@}{2.3em}}
 \renewcommand*\l@subsection{\let\numberline\subsectionnumberline\@tocline{2}{\z@}{3.2em}}
 \renewcommand*\l@subsubsection{\let\numberline\subsubsectionnumberline\@tocline{3}{\z@}{3.7em}}
+\csdef{toc@-1@prehook}{\addpenalty{-\@highpenalty}}
+\csdef{toc@-1@shape}{\csuse{toc@partfont}}
+\csdef{toc@-1@pnumshape}{\@gobble}
 \csdef{toc@0@prehook}{\addpenalty{-\@highpenalty}}
 \csdef{toc@0@shape}{\csuse{toc@chapterfont}}
 %\csdef{toc@1@prehook}{}
@@ -450,6 +505,7 @@
 %\csdef{toc@2@shape}{\csuse{toc@subsectionfont}}
 %\def\numberline#1{{#1 }}
 %\show\numberline -> 1->\hb@xt@ \@tempdima {#1\hfil }.
+\def\partnumberline#1{\partname\space\space{#1}\\}
 \def\chapternumberline#1{\hb@xt@ \@tempdima {#1.\hfil}}
 \def\sectionnumberline#1{\hb@xt@ \@tempdima {\textcolor{enisared}{#1}\hfil}}
 \def\subsectionnumberline#1{\hb@xt@ \@tempdima {\textcolor{enisared}{#1}\hfil}}
@@ -482,7 +538,7 @@
   \hb@xt@ \@pnumwidth
   {%
     \hss
-    #5\kern -\p@ \kern \p@
+   \csuse{toc@#1@pnumshape}{#5}\kern -\p@ \kern \p@
   }%
   \par
   \ifcase #1
@@ -496,6 +552,17 @@
   \fi
   \endgroup
   \fi
+}
+\csdef{toc@partfont}%
+{%
+  \sffamily
+  \bfseries
+  \fontsize{16}{18}%
+  \color{enisared}%
+  \selectfont
+  \mathversion{bold}%
+  \nohyphen
+  \MakeTextUppercase
 }
 \csdef{toc@chapterfont}%
 {%
